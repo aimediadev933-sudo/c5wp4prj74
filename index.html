@@ -1,1 +1,1273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IBN@TEIN - AI-driven Intent-based Networking Platform</title>
+    <style>
+        :root {
+            --primary: #9A2AA0;
+            --secondary: #DA3FA3;
+            --body: #FCF5EC;
+            --text: #1D1D1B;
+            --secondary-dark: #4E245C;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--body);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary-dark));
+            color: white;
+            padding: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(218, 63, 163, 0.2) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -15%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-30px) scale(1.1); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 35px;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            height: 70px;
+            width: auto;
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .logo:hover {
+            transform: translateY(-10px) scale(1.1) rotateY(5deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-text {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            margin-bottom: 1rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+            background: linear-gradient(45deg, #fff, #DA3FA3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text .subtitle {
+            font-size: clamp(1.1rem, 3vw, 1.6rem);
+            opacity: 0.95;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        .hero-text .tech-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .tech-badge {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.8rem 1.8rem;
+            border-radius: 25px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .tech-badge:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--secondary-dark);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(78, 36, 92, 0.3);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-item {
+            color: white;
+            text-decoration: none;
+            padding: 1.2rem 2.5rem;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-item:hover {
+            background: linear-gradient(135deg, rgba(218, 63, 163, 0.2), rgba(154, 42, 160, 0.2));
+            color: var(--secondary);
+        }
+
+        .nav-item:hover::before {
+            width: 80%;
+        }
+
+        /* Main Content */
+        main {
+            padding: 4rem 0;
+        }
+
+        .section {
+            margin-bottom: 6rem;
+            background: white;
+            border-radius: 25px;
+            padding: 3.5rem;
+            box-shadow: 0 15px 50px rgba(154, 42, 160, 0.1);
+            position: relative;
+            overflow: hidden;
+            transform: translateY(30px);
+            opacity: 0;
+            animation: slideInUp 1s ease forwards;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary));
+            background-size: 200% 100%;
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes slideInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section:nth-child(even) {
+            animation-delay: 0.3s;
+        }
+
+        .section:nth-child(odd) {
+            animation-delay: 0.15s;
+        }
+
+        .section h2 {
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin-bottom: 2.5rem;
+            position: relative;
+            font-weight: 800;
+        }
+
+        .section h3 {
+            font-size: 1.8rem;
+            color: var(--secondary-dark);
+            margin: 2.5rem 0 1.5rem 0;
+            font-weight: 700;
+        }
+
+        /* Architecture Showcase */
+        .architecture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin: 3rem 0;
+        }
+
+        .arch-component {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .arch-component::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.4s ease;
+        }
+
+        .arch-component:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 25px 50px rgba(154, 42, 160, 0.4);
+        }
+
+        .arch-component:hover::before {
+            transform: scale(1.5) rotate(45deg);
+        }
+
+        .arch-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .arch-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .arch-desc {
+            position: relative;
+            z-index: 2;
+            line-height: 1.6;
+        }
+
+        /* Countries Grid */
+        .countries-showcase {
+            background: linear-gradient(135deg, rgba(154, 42, 160, 0.05), rgba(218, 63, 163, 0.05));
+            padding: 3rem;
+            border-radius: 20px;
+            margin: 3rem 0;
+        }
+
+        .countries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .country-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .country-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(218, 63, 163, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .country-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--secondary);
+            box-shadow: 0 15px 35px rgba(154, 42, 160, 0.2);
+        }
+
+        .country-card:hover::before {
+            left: 100%;
+        }
+
+        .country-flag {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .country-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Activities Timeline */
+        .timeline {
+            position: relative;
+            margin: 3rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin: 3rem 0;
+            width: 45%;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 55%;
+            text-align: left;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(154, 42, 160, 0.1);
+            position: relative;
+            border: 2px solid var(--body);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            border-color: var(--secondary);
+            transform: scale(1.02);
+        }
+
+        .timeline-marker {
+            position: absolute;
+            top: 50%;
+            width: 20px;
+            height: 20px;
+            background: var(--secondary);
+            border-radius: 50%;
+            transform: translateY(-50%);
+            box-shadow: 0 0 0 4px white, 0 0 0 8px var(--secondary);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-marker {
+            right: -60px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-marker {
+            left: -60px;
+        }
+
+        /* Outcomes Stats */
+        .stats-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-item {
+            background: linear-gradient(135deg, var(--secondary-dark), var(--primary));
+            color: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .stat-item:hover::before {
+            transform: translateX(100%);
+        }
+
+        .stat-item:hover {
+            transform: scale(1.05);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* Tech Stack */
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .tech-item {
+            background: var(--body);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 5px solid var(--primary);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .tech-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(154, 42, 160, 0.1), rgba(218, 63, 163, 0.1));
+            transition: width 0.4s ease;
+        }
+
+        .tech-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(154, 42, 160, 0.15);
+            border-left-color: var(--secondary);
+        }
+
+        .tech-item:hover::before {
+            width: 100%;
+        }
+
+        .tech-item h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 2;
+        }
+
+        .tech-item p {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* SDG Section */
+        .sdg-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .sdg-card {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2.5rem;
+            border-radius: 18px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .sdg-card::before {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: top 0.4s ease;
+        }
+
+        .sdg-card:hover {
+            transform: translateY(-10px) scale(1.02);
+        }
+
+        .sdg-card:hover::before {
+            top: 0;
+        }
+
+        .sdg-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            display: block;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .sdg-title {
+            position: relative;
+            z-index: 2;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        /* Future Vision */
+        .future-vision {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 4rem;
+            border-radius: 25px;
+            text-align: center;
+            margin: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .future-vision::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+        }
+
+        .future-vision h3 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .future-vision p {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-dark);
+            color: white;
+            text-align: center;
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(218, 63, 163, 0.1) 70%);
+        }
+
+        .footer-content {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item {
+                width: calc(100% - 60px);
+                left: 60px !important;
+                text-align: left !important;
+            }
+
+            .timeline-marker {
+                left: -40px !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo-section {
+                gap: 20px;
+            }
+
+            .logo {
+                height: 60px;
+            }
+
+            .section {
+                padding: 2.5rem;
+            }
+
+            .hero-text .tech-badges {
+                gap: 1rem;
+            }
+
+            .tech-badge {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+
+            .nav-item {
+                padding: 1rem 1.8rem;
+                font-size: 0.9rem;
+            }
+
+            .architecture-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .countries-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+
+            .stats-showcase {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+
+            .tech-stack {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-text .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .section h2 {
+                font-size: 2.2rem;
+            }
+
+            .future-vision {
+                padding: 2.5rem;
+            }
+
+            .future-vision h3 {
+                font-size: 2rem;
+            }
+
+            .future-vision p {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <img src="images/logos/tein-logo.png" alt="TEIN CC" class="logo">
+                    <img src="images/logos/asia-connect-logo.png" alt="Asi@Connect" class="logo">
+                    <img src="images/logos/eu-logo.png" alt="European Union" class="logo">
+                </div>
+                <div class="hero-text">
+                    <h1>IBN@TEIN</h1>
+                    <p class="subtitle">AI-driven Intent-based Networking Platform for Service Deployment with QoS Assurance</p>
+                    <div class="tech-badges">
+                        <span class="tech-badge">AI/ML</span>
+                        <span class="tech-badge">SDN</span>
+                        <span class="tech-badge">IBN</span>
+                        <span class="tech-badge">QoS</span>
+                        <span class="tech-badge">Real-time</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <div class="nav-container">
+                <a href="#overview" class="nav-item">Overview</a>
+                <a href="#architecture" class="nav-item">Architecture</a>
+                <a href="#activities" class="nav-item">Activities</a>
+                <a href="#outcomes" class="nav-item">Outcomes</a>
+                <a href="#impact" class="nav-item">Impact</a>
+                <a href="#future" class="nav-item">Future</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <section id="overview" class="section">
+                <h2>Project Overview</h2>
+                <p>The IBN@TEIN project represents a groundbreaking initiative to establish an AI-driven intent-based networking platform across multiple Asian countries. By integrating Software-Defined Networking (SDN), Machine Learning (ML), and real-time monitoring into a closed-loop control system, this project automates service deployment with Quality of Service (QoS) assurance across the TEIN infrastructure.</p>
+
+                <div class="countries-showcase">
+                    <h3>Participating Countries</h3>
+                    <div class="countries-grid">
+                        <div class="country-card">
+                            <div class="country-flag">🇰🇷</div>
+                            <div class="country-name">Korea</div>
+                            <p>Jeju National University, NIA</p>
+                        </div>
+                        <div class="country-card">
+                            <div class="country-flag">🇵🇰</div>
+                            <div class="country-name">Pakistan</div>
+                            <p>PERN, NUST, SUIT</p>
+                        </div>
+                        <div class="country-card">
+                            <div class="country-flag">🇲🇾</div>
+                            <div class="country-name">Malaysia</div>
+                            <p>University of Malaya, MYREN</p>
+                        </div>
+                        <div class="country-card">
+                            <div class="country-flag">🇰🇭</div>
+                            <div class="country-name">Cambodia</div>
+                            <p>Institute of Technology, CamREN</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Project Objectives</h3>
+                <div class="tech-stack">
+                    <div class="tech-item">
+                        <h4>AI-Enabled SDN Architecture</h4>
+                        <p>Deploy domain-based intelligent J-boxes with advanced SDN capabilities for automated network management and service orchestration.</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>ML-Driven Predictive Routing</h4>
+                        <p>Train machine learning models using monitored network metrics to enable intelligent path selection and predictive network optimization.</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>Closed-Loop IBN System</h4>
+                        <p>Establish a comprehensive intent-based networking system capable of managing resources in real-time with minimal human intervention.</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>Regional Collaboration</h4>
+                        <p>Facilitate hands-on training and knowledge transfer for federated deployment across participating countries and institutions.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="architecture" class="section">
+                <h2>System Architecture</h2>
+                <p>The IBN@TEIN platform leverages cutting-edge technologies to create an intelligent, self-managing network infrastructure that adapts to changing conditions and requirements in real-time.</p>
+
+                <div class="architecture-grid">
+                    <div class="arch-component">
+                        <div class="arch-icon">🧠</div>
+                        <div class="arch-title">AI/ML Engine</div>
+                        <div class="arch-desc">Advanced machine learning algorithms for predictive path selection and network optimization using real-time metrics and historical data.</div>
+                    </div>
+                    <div class="arch-component">
+                        <div class="arch-icon">📡</div>
+                        <div class="arch-title">Intelligent J-boxes</div>
+                        <div class="arch-desc">Domain-based intelligent junction boxes that serve as SDN-enabled nodes for distributed network management and control.</div>
+                    </div>
+                    <div class="arch-component">
+                        <div class="arch-icon">🔄</div>
+                        <div class="arch-title">Closed-Loop Control</div>
+                        <div class="arch-desc">Automated feedback system that continuously monitors, analyzes, and adjusts network behavior to maintain optimal performance.</div>
+                    </div>
+                    <div class="arch-component">
+                        <div class="arch-icon">📊</div>
+                        <div class="arch-title">Real-time Monitoring</div>
+                        <div class="arch-desc">Comprehensive monitoring infrastructure using Grafana, Prometheus, and Node Exporter for continuous network visibility.</div>
+                    </div>
+                    <div class="arch-component">
+                        <div class="arch-icon">⚡</div>
+                        <div class="arch-title">QoS Assurance</div>
+                        <div class="arch-desc">Dynamic quality of service management ensuring optimal performance for critical applications and services.</div>
+                    </div>
+                    <div class="arch-component">
+                        <div class="arch-icon">🌐</div>
+                        <div class="arch-title">Federated SDN</div>
+                        <div class="arch-desc">Multi-domain software-defined networking approach enabling seamless collaboration across participating countries.</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="activities" class="section">
+                <h2>Key Activities & Implementation</h2>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>Feasibility & Training Workshops</h4>
+                            <p>Conducted comprehensive feasibility meetings and online training workshops focusing on J-box deployment and SDN/IBN components across all participating countries.</p>
+                        </div>
+                        <div class="timeline-marker"></div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>SDN Cloud Site Deployment</h4>
+                            <p>Successfully deployed three SDN-enabled cloud sites in Malaysia and Korea, establishing the foundational infrastructure for the IBN platform.</p>
+                        </div>
+                        <div class="timeline-marker"></div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>Monitoring Infrastructure</h4>
+                            <p>Implemented real-time monitoring capabilities using Grafana and Prometheus on deployed instances, providing comprehensive network visibility and analytics.</p>
+                        </div>
+                        <div class="timeline-marker"></div>
+                    </div>
+                    
+                                            <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>ML Model Development</h4>
+                            <p>Developed and integrated ML-driven path selection models with SDN controllers, enabling intelligent routing decisions based on network conditions and performance metrics.</p>
+                        </div>
+                        <div class="timeline-marker"></div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>APAN54 Participation</h4>
+                            <p>Presented project outcomes at APAN54 conference and conducted specialized training sessions on PySpark and IBN system implementation for regional stakeholders.</p>
+                        </div>
+                        <div class="timeline-marker"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="outcomes" class="section">
+                <h2>Key Outcomes & Achievements</h2>
+
+                <div class="stats-showcase">
+                    <div class="stat-item">
+                        <span class="stat-number">4</span>
+                        <span class="stat-label">Countries Connected</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">3</span>
+                        <span class="stat-label">SDN Sites Deployed</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">AI Integration</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Real-time Monitoring</span>
+                    </div>
+                </div>
+
+                <h3>Technical Achievements</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin: 1.5rem 0; padding: 2rem; background: linear-gradient(135deg, rgba(154, 42, 160, 0.05), rgba(218, 63, 163, 0.05)); border-radius: 12px; border-left: 5px solid var(--primary);">
+                        <strong>AI-Powered IBN Architecture:</strong> Successfully prototyped and deployed an intelligent intent-based networking architecture in laboratory and test environments, demonstrating autonomous network management capabilities.
+                    </li>
+                    <li style="margin: 1.5rem 0; padding: 2rem; background: linear-gradient(135deg, rgba(154, 42, 160, 0.05), rgba(218, 63, 163, 0.05)); border-radius: 12px; border-left: 5px solid var(--secondary);">
+                        <strong>Intelligent J-box Network:</strong> Established intelligent J-boxes at 3 partner sites with comprehensive monitoring modules, creating a distributed intelligence network across the region.
+                    </li>
+                    <li style="margin: 1.5rem 0; padding: 2rem; background: linear-gradient(135deg, rgba(154, 42, 160, 0.05), rgba(218, 63, 163, 0.05)); border-radius: 12px; border-left: 5px solid var(--primary);">
+                        <strong>Comprehensive Monitoring Stack:</strong> Integrated advanced monitoring tools including Grafana, Node Exporter, and Prometheus for real-time network visibility and performance analytics.
+                    </li>
+                    <li style="margin: 1.5rem 0; padding: 2rem; background: linear-gradient(135deg, rgba(154, 42, 160, 0.05), rgba(218, 63, 163, 0.05)); border-radius: 12px; border-left: 5px solid var(--secondary);">
+                        <strong>Regional Capacity Building:</strong> Trained stakeholders through hybrid and physical workshops, APAN meetings, and specialized technical sessions, building regional expertise in IBN technologies.
+                    </li>
+                </ul>
+
+                <h3>Innovation Highlights</h3>
+                <div class="tech-stack">
+                    <div class="tech-item">
+                        <h4>Predictive Path Selection</h4>
+                        <p>ML algorithms analyze network metrics to predict optimal routing paths, reducing latency and improving overall network performance through intelligent decision-making.</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>Autonomous Service Deployment</h4>
+                        <p>Intent-based networking capabilities enable automatic service deployment and configuration based on high-level policies and requirements.</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>Multi-Domain Federation</h4>
+                        <p>Federated SDN architecture allows seamless collaboration and resource sharing across different administrative domains and countries.</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>Real-time Adaptation</h4>
+                        <p>Closed-loop control system continuously monitors network conditions and automatically adapts configurations to maintain optimal performance.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="impact" class="section">
+                <h2>Challenges & Strategic Solutions</h2>
+
+                <div class="challenge-future-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 3rem; margin: 3rem 0;">
+                    <div style="background: linear-gradient(135deg, rgba(218, 63, 163, 0.1), rgba(154, 42, 160, 0.05)); padding: 2.5rem; border-radius: 15px; border-left: 5px solid var(--secondary);">
+                        <h3 style="color: var(--secondary-dark); margin-bottom: 2rem;">Challenges Addressed</h3>
+                        <div style="space-y: 1.5rem;">
+                            <div style="margin: 1rem 0; padding: 1.5rem; background: rgba(255, 255, 255, 0.7); border-radius: 10px;">
+                                <strong>Equipment Procurement Delays:</strong> Supply chain disruptions affected hardware delivery timelines, requiring adaptive project scheduling and alternative deployment strategies.
+                            </div>
+                            <div style="margin: 1rem 0; padding: 1.5rem; background: rgba(255, 255, 255, 0.7); border-radius: 10px;">
+                                <strong>COVID-19 Impact:</strong> Pandemic restrictions limited physical deployment activities and delayed on-site implementation, necessitating enhanced remote collaboration tools.
+                            </div>
+                            <div style="margin: 1rem 0; padding: 1.5rem; background: rgba(255, 255, 255, 0.7); border-radius: 10px;">
+                                <strong>Vendor Availability:</strong> Limited local vendor presence in some participating countries affected equipment procurement and technical support capabilities.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, rgba(154, 42, 160, 0.1), rgba(78, 36, 92, 0.05)); padding: 2.5rem; border-radius: 15px; border-left: 5px solid var(--primary);">
+                        <h3 style="color: var(--primary); margin-bottom: 2rem;">Strategic Solutions</h3>
+                        <div style="space-y: 1.5rem;">
+                            <div style="margin: 1rem 0; padding: 1.5rem; background: rgba(255, 255, 255, 0.7); border-radius: 10px;">
+                                <strong>Adaptive Deployment:</strong> Implemented flexible deployment strategies that accommodate equipment delivery schedules while maintaining project momentum.
+                            </div>
+                            <div style="margin: 1rem 0; padding: 1.5rem; background: rgba(255, 255, 255, 0.7); border-radius: 10px;">
+                                <strong>Remote Collaboration:</strong> Enhanced virtual training and deployment support capabilities to overcome physical access limitations.
+                            </div>
+                            <div style="margin: 1rem 0; padding: 1.5rem; background: rgba(255, 255, 255, 0.7); border-radius: 10px;">
+                                <strong>Regional Partnerships:</strong> Strengthened partnerships with local organizations to overcome vendor availability challenges and ensure sustainable support.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Contributing to Sustainable Development Goals</h3>
+                <div class="sdg-grid">
+                    <div class="sdg-card">
+                        <span class="sdg-number">SDG 9</span>
+                        <span class="sdg-title">Industry, Innovation and Infrastructure</span>
+                    </div>
+                    <div class="sdg-card">
+                        <span class="sdg-number">SDG 4</span>
+                        <span class="sdg-title">Quality Education</span>
+                    </div>
+                    <div class="sdg-card">
+                        <span class="sdg-number">SDG 17</span>
+                        <span class="sdg-title">Partnerships for the Goals</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="future" class="section">
+                <h2>Future Directions & Roadmap</h2>
+
+                <h3>Next Phase Deployment</h3>
+                <p>The project roadmap includes expanding IBN capabilities to Cambodia and Pakistan following equipment delivery, with comprehensive monitoring infrastructure to support full ML model training and deployment across all participating countries.</p>
+
+                <h3>Enhanced Autonomy</h3>
+                <p>Future development will focus on enabling fully autonomous orchestration via the IBN engine with enhanced multi-domain support, allowing for seamless service deployment and management across the entire TEIN network infrastructure.</p>
+
+                <div class="future-vision">
+                    <h3>Vision for Intelligent Networks</h3>
+                    <p>The IBN@TEIN project is pioneering the future of intelligent networking in Asia, where AI-driven systems will autonomously manage complex network infrastructures, optimize performance in real-time, and enable unprecedented levels of service quality and reliability. This foundation will support the next generation of research, education, and innovation across the region.</p>
+                </div>
+
+                <h3>Scaling & Replication</h3>
+                <div class="tech-stack">
+                    <div class="tech-item">
+                        <h4>Regional Expansion</h4>
+                        <p>Extend IBN capabilities to additional TEIN member countries, creating a comprehensive intelligent network infrastructure across Asia-Pacific.</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>Enhanced ML Models</h4>
+                        <p>Develop more sophisticated machine learning algorithms incorporating advanced analytics, predictive capabilities, and autonomous decision-making processes.</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>Cross-Domain Integration</h4>
+                        <p>Implement seamless integration between different network domains, enabling unified management and optimization across diverse infrastructure environments.</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>Industry Standards</h4>
+                        <p>Contribute to the development of industry standards for intent-based networking and AI-driven network management in research and education networks.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h3>IBN@TEIN Project</h3>
+                <p>Pioneering AI-driven intent-based networking across Asia through innovative technology integration and regional collaboration.</p>
+                <p style="margin-top: 2rem; opacity: 0.9; font-size: 1.1rem;">
+                    Multi-country collaboration spanning Korea, Pakistan, Malaysia, and Cambodia<br>
+                    Leading the future of intelligent network infrastructure
+                </p>
+                <p style="margin-top: 1.5rem; font-size: 0.95rem; opacity: 0.8;">
+                    WP4 Project - 3rd Call | AI/ML • SDN • IBN • QoS Assurance
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections for animations
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Enhanced interactive effects
+        document.querySelectorAll('.arch-component').forEach(component => {
+            component.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-15px) scale(1.03)';
+                this.style.boxShadow = '0 25px 50px rgba(154, 42, 160, 0.4)';
+            });
+            
+            component.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+                this.style.boxShadow = 'none';
+            });
+        });
+
+        // Country card interactions
+        document.querySelectorAll('.country-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px)';
+                this.style.borderColor = 'var(--secondary)';
+                this.style.boxShadow = '0 15px 35px rgba(154, 42, 160, 0.2)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.borderColor = 'transparent';
+                this.style.boxShadow = 'none';
+            });
+        });
+
+        // Stat item animations
+        document.querySelectorAll('.stat-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+
+        // Tech item hover effects
+        document.querySelectorAll('.tech-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateX(10px)';
+                this.style.boxShadow = '0 10px 30px rgba(154, 42, 160, 0.15)';
+                this.style.borderLeftColor = 'var(--secondary)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateX(0)';
+                this.style.boxShadow = 'none';
+                this.style.borderLeftColor = 'var(--primary)';
+            });
+        });
+
+        // Timeline item interactions
+        document.querySelectorAll('.timeline-content').forEach(content => {
+            content.addEventListener('mouseenter', function() {
+                this.style.borderColor = 'var(--secondary)';
+                this.style.transform = 'scale(1.02)';
+            });
+            
+            content.addEventListener('mouseleave', function() {
+                this.style.borderColor = 'var(--body)';
+                this.style.transform = 'scale(1)';
+            });
+        });
+
+        // SDG card effects
+        document.querySelectorAll('.sdg-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Progressive section loading animation
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('.section');
+            const triggerBottom = window.innerHeight / 5 * 4;
+            
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                
+                if (sectionTop < triggerBottom) {
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        // Initialize page animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Stagger section animations
+            setTimeout(() => {
+                document.querySelectorAll('.section').forEach((section, index) => {
+                    setTimeout(() => {
+                        section.style.opacity = '1';
+                        section.style.transform = 'translateY(0)';
+                    }, index * 150);
+                });
+            }, 400);
+
+            // Add floating animation to header logos
+            document.querySelectorAll('.logo').forEach((logo, index) => {
+                logo.style.animationDelay = `${index * 0.3}s`;
+            });
+        });
+
+        // Add dynamic background effects
+        function createFloatingElements() {
+            const header = document.querySelector('header');
+            for (let i = 0; i < 3; i++) {
+                const element = document.createElement('div');
+                element.style.position = 'absolute';
+                element.style.width = '100px';
+                element.style.height = '100px';
+                element.style.background = 'rgba(255, 255, 255, 0.05)';
+                element.style.borderRadius = '50%';
+                element.style.top = Math.random() * 100 + '%';
+                element.style.left = Math.random() * 100 + '%';
+                element.style.animation = `float ${8 + Math.random() * 4}s ease-in-out infinite`;
+                element.style.animationDelay = Math.random() * 4 + 's';
+                header.appendChild(element);
+            }
+        }
+
+        // Initialize floating elements
+        createFloatingElements();
+    </script>
+</body>
+</html>
